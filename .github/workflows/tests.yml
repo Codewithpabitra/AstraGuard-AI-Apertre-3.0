@@ -1,0 +1,107 @@
+name: Tests & Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.11', '3.13']
+      fail-fast: false
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-mock pytest-timeout
+    
+    - name: Lint with Python syntax check
+      run: |
+        python -m py_compile anomaly/*.py core/*.py state_machine/*.py memory_engine/*.py
+    
+    - name: Run unit tests
+      run: |
+        pytest tests/ -v --tb=short -m "not slow" --timeout=10
+    
+    - name: Run coverage analysis
+      run: |
+        pytest tests/ \
+          --cov=core \
+          --cov=anomaly \
+          --cov=state_machine \
+          --cov=memory_engine \
+          --cov-report=term-missing \
+          --cov-report=xml \
+          --cov-fail-under=80 \
+          -v
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+    
+    - name: Run integration tests
+      run: |
+        python validate_integration.py
+      continue-on-error: true
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+    
+    - name: Install security tools
+      run: |
+        pip install bandit safety
+    
+    - name: Run Bandit security scan
+      run: |
+        bandit -r core anomaly state_machine memory_engine -ll
+      continue-on-error: true
+    
+    - name: Check for known vulnerabilities
+      run: |
+        pip install -r requirements.txt
+        safety check --json
+      continue-on-error: true
+
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+    
+    - name: Install quality tools
+      run: |
+        pip install pylint flake8
+    
+    - name: Run Flake8
+      run: |
+        flake8 core anomaly state_machine memory_engine --max-line-length=100 --exclude=__pycache__
+      continue-on-error: true
