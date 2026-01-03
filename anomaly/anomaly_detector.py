@@ -283,16 +283,15 @@ def detect_anomaly(data: Dict) -> Tuple[bool, float]:
 
         # Use heuristic fallback
         is_anomalous, score = _detect_anomaly_heuristic(data)
-        (
+        if _USING_HEURISTIC_MODE:
             health_monitor.mark_degraded(
                 "anomaly_detector",
                 error_msg="Using heuristic detection",
                 fallback_active=True,
                 metadata={"mode": "heuristic"},
             )
-            if _USING_HEURISTIC_MODE
-            else health_monitor.mark_healthy("anomaly_detector")
-        )
+        else:
+            health_monitor.mark_healthy("anomaly_detector")
 
         # Record metrics for heuristic
         ANOMALY_DETECTIONS_TOTAL.labels(detector_type="heuristic").inc()
