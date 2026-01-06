@@ -25,8 +25,8 @@ We are committed to fostering an environment that respects the dignity, rights, 
 ### Unacceptable Behavior
 
 The following behaviors are not tolerated:
-- Harassment — repeated or unwanted behavior after a clear request to stop.
-- Personal or character attacks — insults, demeaning language, or hostility toward individuals or groups.
+- Harassment : repeated or unwanted behavior after a clear request to stop.
+- Personal or character attacks : insults, demeaning language, or hostility toward individuals or groups.
 - Discrimination or stereotyping based on personal characteristics.
 - Sexualized or inappropriate conduct in any project context.
 - Sharing private or sensitive information without consent.
@@ -38,7 +38,7 @@ The following behaviors are not tolerated:
 ---
 ### Additional Restrictions
 
-- Impersonation — pretending to be another person or maintainer.
+- Impersonation : pretending to be another person or maintainer.
 - Failure to credit sources or plagiarism.
 - Spam or promotional content unrelated to the project.
 - Misrepresentation of project affiliation or authority.
@@ -60,10 +60,10 @@ Report it confidentially via:
 Project maintainers are responsible for enforcing this Code of Conduct.
 Depending on severity and impact, actions may include:
 
-- Warning — private notice with guidance.
-- Temporary restrictions — limited participation for a defined period.
-- Temporary suspension — removal from project spaces.
-- Permanent ban — for severe or repeated violations.
+- Warning : private notice with guidance.
+- Temporary restrictions : limited participation for a defined period.
+- Temporary suspension : removal from project spaces.
+- Permanent ban : for severe or repeated violations.
 
 Maintainers may skip steps based on severity. Decisions are made to protect the project and community, not to punish individuals.
 
