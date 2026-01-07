@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface DesktopTabNavProps {
-    activeTab: 'mission' | 'systems' | 'chaos';
-    onTabChange: (tab: 'mission' | 'systems' | 'chaos') => void;
+    activeTab: 'mission' | 'systems' | 'chaos' | 'uplink';
+    onTabChange: (tab: 'mission' | 'systems' | 'chaos' | 'uplink') => void;
 }
 
 export const DesktopTabNav: React.FC<DesktopTabNavProps> = ({ activeTab, onTabChange }) => {
@@ -42,6 +42,18 @@ export const DesktopTabNav: React.FC<DesktopTabNavProps> = ({ activeTab, onTabCh
                 onClick={() => onTabChange('chaos')}
             >
                 Chaos
+            </button>
+
+            <button
+                id="uplink-tab"
+                data-tab="uplink"
+                className={`ml-2 px-6 py-3 rounded-t-lg font-mono text-lg font-semibold transition-all duration-300 ${activeTab === 'uplink'
+                    ? 'tab-active-green bg-green-500/10 border-b-2 border-green-400 text-green-300 glow-green'
+                    : 'text-gray-400 hover:text-green-300 hover:bg-green-500/5'
+                    }`}
+                onClick={() => onTabChange('uplink')}
+            >
+                Uplink
             </button>
         </div>
     );

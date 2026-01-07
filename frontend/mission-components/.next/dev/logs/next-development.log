@@ -880,3 +880,208 @@
 [00:18:09.377] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
 [00:18:09.377] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
 [00:18:09.377] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:19:09.366] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:19:09.366] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:19:09.366] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:09.376] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:09.376] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:09.376] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:46.258] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:46.361] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:46.680] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:46.680] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:46.680] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:46.680] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:48.289] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:48.289] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:48.289] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:50.854] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:50.854] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:50.854] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:51.089] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:20:51.288] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:51.288] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:20:51.288] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:20:51.288] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1767812817639}
+[00:20:51.288] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:51.288] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:53.314] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:53.314] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:53.314] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:54.434] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:55.283] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:55.283] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:55.283] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:55.488] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/chaos/status undefined
+[00:20:55.488] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/chaos/status undefined
+[00:20:57.276] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:57.276] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:57.276] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:20:57.469] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:57.470] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:20:59.282] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:20:59.282] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:20:59.282] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:21:01.280] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:21:01.280] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:21:01.280] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:21:03.285] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:21:03.285] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:21:03.285] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:21:05.272] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:21:05.272] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:21:05.272] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:21:07.277] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:21:07.277] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:21:07.277] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:21:09.277] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:21:09.277] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:21:09.277] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:21:10.330] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:3000/enter-ai?_rsc=1h0h0 {"credentials":"same-origin","headers":{"next-router-state-tree":"%5B%22%22%2C%7B%22children%22%3A%5B%22enter-ai%22%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%2Cnull%2Cnull%5D%7D%2Cnull%2C%22refetch%22%5D%7D%2Cnull%2Cnull%5D","rsc":"1","x-nextjs-html-request-id":"7hslHEEU0muW7breX-xhO","x-nextjs-request-id":"40441204"},"priority":"auto"}
+[00:21:10.488] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/enter-ai color: rgb(120, 120, 120) color: inherit {"dp":"/enter-ai","o":"http://localhost:3000/enter-ai","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1767812836856}
+[00:21:12.355] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:12.586] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:21:12.586] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:21:12.586] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:21:12.586] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1767812838954}
+[00:23:53.305] Server  LOG      ✓ Compiled in 244ms
+[00:24:18.264] Server  LOG      ✓ Compiled in 107ms
+[00:24:22.146] Server  LOG      ✓ Compiled in 114ms
+[00:27:29.383] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:29.532] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:27:29.532] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/enter-ai","route":"/enter-ai"}
+[00:27:29.532] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/enter-ai color: rgb(120, 120, 120) color: inherit {"dp":"/enter-ai","o":"http://localhost:3000/enter-ai","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1767813215903}
+[00:27:35.442] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:3000/dashboard?_rsc=of89a {"credentials":"same-origin","headers":{"next-router-state-tree":"%5B%22%22%2C%7B%22children%22%3A%5B%22enter-ai%22%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%2Cnull%2Cnull%5D%7D%2Cnull%2Cnull%5D%7D%2Cnull%2Cnull%2Ctrue%5D","next-url":"/enter-ai","rsc":"1","x-nextjs-html-request-id":"oqGyr6tZWejXpKpgHCRgl","x-nextjs-request-id":"589b4b7d"},"priority":"auto"}
+[00:27:36.541] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:36.541] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:36.541] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1767813222911}
+[00:27:36.973] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:36.973] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:36.973] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:36.973] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:38.596] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:38.596] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:38.596] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:40.559] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:40.559] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:40.559] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:42.545] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:42.871] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:42.871] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:44.603] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:44.603] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:44.603] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:46.567] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:46.567] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:46.567] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:48.559] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:48.559] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:48.559] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:52.372] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:52.372] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:52.372] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:54.375] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:54.375] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:54.375] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:56.365] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:56.365] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:56.365] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:27:58.371] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:27:58.371] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:27:58.371] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined
+[00:28:00.366] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/status undefined
+[00:28:00.366] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/telemetry/latest undefined
+[00:28:00.366] Browser DEBUG   [Recorder] Fetch request: GET http://localhost:8002/api/v1/history/anomalies?limit=10 undefined

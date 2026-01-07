@@ -664,7 +664,47 @@ class AnalysisResponse(BaseModel):
     recommendation: str
     confidence: float
 
+
+class UplinkCommand(BaseModel):
+    target_id: str
+    command: str
+    params: dict = {}
+
+class UplinkResponse(BaseModel):
+    status: str
+    ack_id: str
+    message: str
+    timestamp: datetime
+
+@app.post("/api/v1/uplink", response_model=UplinkResponse)
+async def send_uplink_command(cmd: UplinkCommand):
+    """
+    Send a command to a specific satellite or system.
+    """
+    # Simulate transmission delay
+    time.sleep(0.8)
+
+    ack_id = secrets.token_hex(4).upper()
+    
+    # Simple logic to generate response based on command
+    if cmd.command.upper() == "REBOOT":
+        msg = f"Reboot sequence initiated for {cmd.target_id}. Estimated downtime: 45s."
+    elif cmd.command.upper() == "DIAGNOSTICS":
+        msg = f"Diagnostics running on {cmd.target_id}. Report will be downlinked in T+120s."
+    elif cmd.command.upper() == "DEPLOY":
+        msg = f"Actuator deployment command acknowledged for {cmd.target_id}. Monitoring telemetry."
+    else:
+        msg = f"Command '{cmd.command}' queued for uplink to {cmd.target_id}."
+
+    return UplinkResponse(
+        status="sent",
+        ack_id=ack_id,
+        message=msg,
+        timestamp=datetime.now()
+    )
+
 @app.post("/api/v1/analysis/investigate", response_model=AnalysisResponse)
+
 async def investigate_anomaly(request: AnalysisRequest):
     """
     AI-powered anomaly investigation (Mocked for MVP).

@@ -10,6 +10,7 @@ import dashboardData from '../mocks/dashboard.json';
 
 import { SystemsPanel } from '../components/systems/SystemsPanel';
 import { ChaosPanel } from '../components/chaos/ChaosPanel';
+import { CommandTerminal } from '../components/uplink/CommandTerminal';
 
 import { DashboardProvider, useDashboard } from '../context/DashboardContext';
 import { LoadingSkeleton } from '../components/ui/LoadingSkeleton';
@@ -18,7 +19,7 @@ import { MobileNavHamburger } from '../components/ui/MobileNavHamburger';
 import { DesktopTabNav } from '../components/dashboard/DesktopTabNav';
 
 const DashboardContent: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'mission' | 'systems' | 'chaos'>('mission');
+  const [activeTab, setActiveTab] = useState<'mission' | 'systems' | 'chaos' | 'uplink'>('mission');
   const [selectedAnomalyForAnalysis, setSelectedAnomalyForAnalysis] = useState<AnomalyEvent | null>(null);
   const { isConnected } = useDashboard();
   const mission = dashboardData.mission as MissionState;
@@ -55,6 +56,11 @@ const DashboardContent: React.FC = () => {
               {activeTab === 'chaos' && (
                 <TransitionWrapper isActive={activeTab === 'chaos'}>
                   <ChaosPanel className="max-w-4xl mx-auto mt-4" />
+                </TransitionWrapper>
+              )}
+              {activeTab === 'uplink' && (
+                <TransitionWrapper isActive={activeTab === 'uplink'}>
+                  <CommandTerminal />
                 </TransitionWrapper>
               )}
 
