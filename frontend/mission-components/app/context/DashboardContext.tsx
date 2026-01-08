@@ -4,6 +4,21 @@ import { createContext, useContext, ReactNode, useState, useEffect } from 'react
 import { TelemetryState, WSMessage } from '../types/websocket';
 import { useDashboardWebSocket } from '../hooks/useDashboardWebSocket';
 
+export interface Annotation {
+    id: string;
+    targetId: string; // ID of anomaly or metric
+    text: string;
+    author: string;
+    timestamp: string;
+}
+
+export interface Operator {
+    id: string;
+    name: string;
+    avatar: string;
+    activePanel: string;
+}
+
 interface ContextValue {
     state: TelemetryState;
     isConnected: boolean;
@@ -17,15 +32,39 @@ interface ContextValue {
     togglePlay: () => void;
     isBattleMode: boolean;
     setBattleMode: (active: boolean) => void;
+    // Collaboration
+    annotations: Annotation[];
+    addAnnotation: (note: Omit<Annotation, 'id' | 'timestamp'>) => void;
+    removeAnnotation: (id: string) => void;
+    presence: Operator[];
 }
 
 const DashboardContext = createContext<ContextValue | undefined>(undefined);
 
 export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    // TODO: Add error boundary for context provider failures
-    // TODO: Implement state persistence caching for dashboard data
     const ws = useDashboardWebSocket();
     const [isBattleMode, setBattleMode] = useState(false);
+    const [annotations, setAnnotations] = useState<Annotation[]>([]);
+    const [presence] = useState<Operator[]>([
+        { id: '1', name: 'SIGMA', avatar: 'Σ', activePanel: 'Mission Control' },
+        { id: '2', name: 'ALPHA', avatar: 'A', activePanel: 'Systems' },
+        { id: '3', name: 'KAPPA', avatar: 'K', activePanel: 'Chaos Engine' },
+    ]);
+
+    // Add Annotation
+    const addAnnotation = (note: Omit<Annotation, 'id' | 'timestamp'>) => {
+        const newNote: Annotation = {
+            ...note,
+            id: Math.random().toString(36).substr(2, 9),
+            timestamp: new Date().toLocaleTimeString(),
+        };
+        setAnnotations(prev => [newNote, ...prev]);
+    };
+
+    // Remove Annotation
+    const removeAnnotation = (id: string) => {
+        setAnnotations(prev => prev.filter(a => a.id !== id));
+    };
 
     // Auto-trigger Battle Mode on Critical Anomalies
     useEffect(() => {
@@ -40,7 +79,11 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
     const value = {
         ...ws,
         isBattleMode,
-        setBattleMode
+        setBattleMode,
+        annotations,
+        addAnnotation,
+        removeAnnotation,
+        presence
     };
 
     return (
