@@ -513,7 +513,7 @@ require_analyst = require_permission(Permission.READ_STATUS)
 class UserCreateRequest(BaseModel):
     """Request to create a new user."""
     username: str = Field(..., min_length=3, max_length=50)
-    email: str = Field(..., regex=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+    email: str = Field(..., pattern=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
     role: UserRole
     password: Optional[str] = Field(None, min_length=8)
 

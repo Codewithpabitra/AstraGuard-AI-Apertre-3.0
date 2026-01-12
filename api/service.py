@@ -43,6 +43,7 @@ from core.auth import (
     require_analyst,
     UserRole,
     Permission,
+    User,
 )
 from state_machine.state_engine import StateMachine, MissionPhase
 from config.mission_phase_policy_loader import MissionPhasePolicyLoader
@@ -657,7 +658,7 @@ async def get_anomaly_history(
 async def login(request: LoginRequest):
     """Authenticate user and return JWT token."""
     auth_manager = get_auth_manager()
-    token = await auth_manager.authenticate_user(request.username, request.password)
+    token = auth_manager.authenticate_user(request.username, request.password)
     return TokenResponse(access_token=token, token_type="bearer")
 
 
@@ -735,7 +736,7 @@ async def list_api_keys(current_user: User = Depends(get_current_user)):
 async def revoke_api_key(key_id: str, current_user: User = Depends(get_current_user)):
     """Revoke an API key."""
     auth_manager = get_auth_manager()
-    await auth_manager.revoke_api_key(key_id, current_user.id)
+    auth_manager.revoke_api_key(key_id, current_user.id)
     return {"message": "API key revoked successfully"}
 
 
