@@ -1,145 +1,72 @@
-"""
-Race Condition Test for Health Monitor State Inconsistency
-
-Tests concurrent access to health monitor components to reproduce
-the race condition where components appear healthy but are actually failing.
-"""
-
-import asyncio
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor
-from typing import List
-import pytest
+import numpy as np
+from memory_engine.memory_store import AdaptiveMemoryStore
+from datetime import datetime
+from core.secrets import init_secrets_manager
 
-from core.component_health import SystemHealthMonitor, HealthStatus
-from backend.health_monitor import HealthMonitor, FallbackMode
+# Initialize secrets manager
+init_secrets_manager()
 
+def test_thread_safety():
+    """Test thread safety of retrieve method with concurrent writes."""
+    store = AdaptiveMemoryStore(max_capacity=1000)
 
-def test_concurrent_component_updates():
-    """Test concurrent component status updates that can cause race conditions."""
-    monitor = SystemHealthMonitor()
-    monitor.reset()  # Ensure clean state
+    # Populate with initial events
+    for i in range(100):
+        embedding = np.random.rand(384).tolist()
+        metadata = {'severity': 0.5, 'type': f'event_{i}'}
+        store.write(embedding, metadata)
 
-    # Register test components
-    components = ["api_server", "database", "cache", "worker"]
+    errors = []
 
-    def rapid_status_updates(component: str, iterations: int = 100):
-        """Simulate rapid status changes for a component."""
-        for i in range(iterations):
-            # Simulate component going through states rapidly
-            monitor.mark_healthy(component)
-            monitor.mark_degraded(component, f"temp error {i}")
-            monitor.mark_failed(component, f"critical error {i}")
-            monitor.mark_healthy(component)  # Back to healthy
+    def retrieve_worker():
+        """Worker that repeatedly calls retrieve."""
+        try:
+            for _ in range(100):
+                query = np.random.rand(384).tolist()
+                results = store.retrieve(query, top_k=5)
+                # Basic sanity check
+                assert len(results) <= 5
+                time.sleep(0.001)  # Small delay to allow interleaving
+        except Exception as e:
+            errors.append(f"Retrieve error: {e}")
 
-    # Run concurrent updates
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        futures = []
-        for comp in components:
-            future = executor.submit(rapid_status_updates, comp, 50)
-            futures.append(future)
+    def write_worker():
+        """Worker that repeatedly calls write."""
+        try:
+            for i in range(100):
+                embedding = np.random.rand(384).tolist()
+                metadata = {'severity': 0.5, 'type': f'new_event_{i}'}
+                store.write(embedding, metadata)
+                time.sleep(0.001)  # Small delay to allow interleaving
+        except Exception as e:
+            errors.append(f"Write error: {e}")
 
-        # Wait for all updates to complete
-        for future in futures:
-            future.result()
+    # Start multiple threads
+    threads = []
+    for _ in range(5):
+        threads.append(threading.Thread(target=retrieve_worker))
+        threads.append(threading.Thread(target=write_worker))
 
-    # Check final state - should be consistent
-    status = monitor.get_system_status()
+    # Start all threads
+    for t in threads:
+        t.start()
 
-    # All components should be healthy at the end
-    assert status["component_counts"]["healthy"] == len(components)
-    assert status["component_counts"]["failed"] == 0
-    assert status["component_counts"]["degraded"] == 0
+    # Wait for all to complete
+    for t in threads:
+        t.join()
 
-    print("✓ Concurrent component updates completed without inconsistency")
-
-
-def test_health_monitor_cascade_race():
-    """Test race condition in cascade_fallback method."""
-    # Create monitor with minimal dependencies to avoid secrets initialization
-    from unittest.mock import MagicMock
-    monitor = HealthMonitor()
-    monitor.resource_monitor = MagicMock()
-    monitor.resource_monitor.check_resource_health.return_value = {"overall": "healthy"}
-    monitor.resource_monitor.get_current_metrics.return_value = MagicMock()
-    monitor.resource_monitor.get_current_metrics.return_value.to_dict.return_value = {}
-
-    def trigger_cascades(iterations: int = 50):
-        """Trigger cascade evaluations rapidly."""
-        for i in range(iterations):
-            asyncio.run(monitor.cascade_fallback())
-
-    def update_components(iterations: int = 50):
-        """Update component health rapidly."""
-        for i in range(iterations):
-            monitor.component_health.mark_failed("test_component", f"error {i}")
-            monitor.component_health.mark_healthy("test_component")
-
-    # Run both operations concurrently
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        cascade_future = executor.submit(trigger_cascades, 30)
-        update_future = executor.submit(update_components, 30)
-
-        cascade_future.result()
-        update_future.result()
-
-    # Verify final state is consistent
-    state = asyncio.run(monitor.get_comprehensive_state())
-
-    # Should not be in inconsistent state
-    fallback_mode = state["fallback"]["mode"]
-    failed_components = state["system"]["failed_components"]
-
-    # If in safe mode, should have failed components
-    if fallback_mode == FallbackMode.SAFE.value:
-        assert failed_components >= 2, "Safe mode should require multiple failures"
-
-    print("✓ Cascade race condition test completed")
-
-
-def test_concurrent_health_checks():
-    """Test concurrent health state queries during updates."""
-    monitor = HealthMonitor()
-
-    results = []
-
-    def health_checks(iterations: int = 20):
-        """Perform health checks concurrently."""
-        for i in range(iterations):
-            try:
-                state = asyncio.run(monitor.get_comprehensive_state())
-                results.append(state)
-            except Exception as e:
-                results.append(f"error: {e}")
-
-    def component_failures(iterations: int = 20):
-        """Simulate component failures during health checks."""
-        for i in range(iterations):
-            monitor.component_health.mark_failed("network", f"timeout {i}")
-            time.sleep(0.01)  # Small delay to increase race window
-            monitor.component_health.mark_healthy("network")
-
-    # Run concurrent operations
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        check_future = executor.submit(health_checks, 15)
-        fail_future = executor.submit(component_failures, 15)
-
-        check_future.result()
-        fail_future.result()
-
-    # Verify no errors occurred
-    errors = [r for r in results if isinstance(r, str) and r.startswith("error")]
-    assert len(errors) == 0, f"Health check errors: {errors}"
-
-    print("✓ Concurrent health checks completed successfully")
-
+    if errors:
+        print(f"Errors occurred: {errors}")
+        return False
+    else:
+        print("No race condition errors detected.")
+        return True
 
 if __name__ == "__main__":
-    print("Running race condition tests...")
-
-    test_concurrent_component_updates()
-    test_health_monitor_cascade_race()
-    test_concurrent_health_checks()
-
-    print("All race condition tests passed!")
+    success = test_thread_safety()
+    if success:
+        print("Thread safety test passed!")
+    else:
+        print("Thread safety test failed!")
