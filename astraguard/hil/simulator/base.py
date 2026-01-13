@@ -15,6 +15,7 @@ from ..schemas.telemetry import (
     ThermalData,
     OrbitData,
 )
+from .attitude import AttitudeSimulator
 
 
 class SatelliteSimulator(ABC):
@@ -103,6 +104,10 @@ class StubSatelliteSimulator(SatelliteSimulator):
         super().__init__(sat_id)
         self._fault_active = False
         self._fault_type: Optional[str] = None
+        
+        # Attitude dynamics simulator
+        self.attitude_sim = AttitudeSimulator(sat_id)
+        self._tumble_injected = False
     
     async def generate_telemetry(self) -> TelemetryPacket:
         """
@@ -113,6 +118,22 @@ class StubSatelliteSimulator(SatelliteSimulator):
         import random
         
         timestamp = datetime.now()
+        
+        # Update attitude dynamics (1Hz telemetry)
+        self.attitude_sim.update(dt=1.0)
+        
+        # Inject attitude fault if needed
+        if self._fault_active and self._fault_type == "attitude_desync" and not self._tumble_injected:
+            self.attitude_sim.inject_tumble_fault()
+            self._tumble_injected = True
+        
+        # Recover control if fault is cleared
+        if not self._fault_active and self._tumble_injected:
+            self.attitude_sim.recover_control()
+            self._tumble_injected = False
+        
+        # Get current attitude data
+        attitude = self.attitude_sim.get_attitude_data()
         
         # Simulate fault effects across multiple subsystems
         if self._fault_active and self._fault_type == "power_brownout":
@@ -125,13 +146,6 @@ class StubSatelliteSimulator(SatelliteSimulator):
             battery_soc = 0.87
             thermal_status = "nominal"
             battery_temp = 15.2
-        
-        # Attitude: near nadir pointing
-        attitude = AttitudeData(
-            quaternion=[0.707, 0.01, 0.02, 0.03],
-            angular_velocity=[0.001, 0.002, 0.001],
-            nadir_pointing_error_deg=random.uniform(0.1, 2.0)
-        )
         
         # Power: battery + solar
         power = PowerData(
@@ -180,12 +194,17 @@ class StubSatelliteSimulator(SatelliteSimulator):
         Inject fault into stub simulator.
         
         Args:
-            fault_type: Type of fault
+            fault_type: Type of fault (e.g., 'power_brownout', 'attitude_desync')
             severity: Fault severity (0.0-1.0)
             duration: Fault duration in seconds
         """
         self._fault_active = True
         self._fault_type = fault_type
+        
+        if fault_type == "attitude_desync":
+            # Attitude fault will be injected on next telemetry generation
+            pass
+        
         print(
             f"Sat {self.sat_id}: Injected {fault_type} fault "
             f"(severity={severity}, duration={duration}s)"
