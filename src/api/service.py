@@ -541,22 +541,52 @@ async def metrics(username: str = Depends(get_current_username)):
 @app.post("/api/v1/telemetry", response_model=AnomalyResponse, status_code=status.HTTP_200_OK)
 async def submit_telemetry(telemetry: TelemetryInput, current_user: User = Depends(require_operator)):
     """
-    Submit a single telemetry data point for real-time anomaly detection.
+    Submit a single telemetry data point for real-time anomaly detection and analysis.
 
-    This endpoint orchestrates the entire analysis pipeline:
+    This endpoint orchestrates the complete AstraGuard AI pipeline:
     1. Validates input against physical constraints.
     2. Runs anomaly detection models (e.g., Isolation Forest, Autoencoder).
     3. Classifies the type of anomaly if detected.
     4. Consults the Phase-Aware Handler for context-specific decisions.
     5. Updates predictive maintenance models.
 
+    The system analyzes sensor readings and provides immediate feedback on system
+    health, recommended actions, and mission phase policy compliance.
+
+    Authentication:
+        Requires API key with 'operator' role and 'write' permission.
+
+    Chaos Engineering:
+        Supports chaos injection for testing resilience (e.g., network latency,
+        model failures).
+
     Args:
-        telemetry (TelemetryInput): Sensor data from the satellite subsystem.
+        telemetry (TelemetryInput): Sensor data from the satellite subsystem including:
+            - voltage: Electrical voltage reading
+            - temperature: Temperature sensor reading
+            - gyro: Gyroscope measurements
+            - current: Current draw (optional)
+            - wheel_speed: Wheel speed (optional)
+            - Additional system metrics (CPU, memory, network, etc.)
         current_user (User): The authenticated operator.
 
     Returns:
-        AnomalyResponse: Detailed analysis including anomaly score, severity,
-        and recommended actions based on the current mission phase.
+        AnomalyResponse: Comprehensive analysis result containing:
+            - Detection results (is_anomaly, anomaly_score, anomaly_type)
+            - Severity assessment and recommended actions
+            - Mission phase context and policy decisions
+            - Confidence scores and reasoning
+            - Recurrence information
+
+    Raises:
+        HTTPException 401: Authentication failed
+        HTTPException 403: Insufficient permissions
+        HTTPException 503: Service unavailable (chaos injection or system issues)
+        HTTPException 500: Internal processing error
+
+    Note:
+        Processing includes ML-based anomaly detection, predictive maintenance analysis,
+        and storage in memory for pattern recognition. Results are logged for monitoring.
     """
     request_start = time.time()
     
