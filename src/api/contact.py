@@ -18,6 +18,10 @@ from fastapi.responses import JSONResponse
 import aiosqlite
 import aiofiles
 import asyncio
+from astraguard.logging_config import get_logger
+
+# Initialize logger
+logger = get_logger(__name__)
 
 # Rate limiting
 try:
@@ -241,19 +245,37 @@ async def save_submission(
 
 async def log_notification(submission: ContactSubmission, submission_id: int):
     """Log notification to file (fallback when email is not configured)"""
-    DATA_DIR.mkdir(exist_ok=True)
-    
-    log_entry = {
-        "timestamp": datetime.now().isoformat(),
-        "submission_id": submission_id,
-        "name": submission.name,
-        "email": submission.email,
-        "subject": submission.subject,
-        "message": submission.message[:100] + "..." if len(submission.message) > 100 else submission.message
-    }
-    
-    async with aiofiles.open(NOTIFICATION_LOG, "a") as f:
-        await f.write(json.dumps(log_entry) + "\n")
+    try:
+        DATA_DIR.mkdir(exist_ok=True)
+
+        log_entry = {
+            "timestamp": datetime.now().isoformat(),
+            "submission_id": submission_id,
+            "name": submission.name,
+            "email": submission.email,
+            "subject": submission.subject,
+            "message": submission.message[:100] + "..." if len(submission.message) > 100 else submission.message
+        }
+
+        async with aiofiles.open(NOTIFICATION_LOG, "a") as f:
+            await f.write(json.dumps(log_entry) + "\n")
+    except OSError as e:
+        logger.error(
+            "Failed to write notification log",
+            error_type=type(e).__name__,
+            error_message=str(e),
+            submission_id=submission_id,
+            log_path=str(NOTIFICATION_LOG)
+        )
+        raise
+    except Exception as e:
+        logger.error(
+            "Unexpected error during notification logging",
+            error_type=type(e).__name__,
+            error_message=str(e),
+            submission_id=submission_id
+        )
+        raise
 
 
 async def send_email_notification(submission: ContactSubmission, submission_id: int):
@@ -282,7 +304,13 @@ async def send_email_notification(submission: ContactSubmission, submission_id: 
             # response = sg.send(message)
             pass
         except Exception as e:
-            print(f"Email sending failed: {e}")
+            logger.warning(
+                "Email notification failed, falling back to file logging",
+                error_type=type(e).__name__,
+                error_message=str(e),
+                submission_id=submission_id,
+                email=submission.email
+            )
             await log_notification(submission, submission_id)
     else:
         # Fallback to file logging
@@ -331,19 +359,45 @@ async def submit_contact_form(
     
     # Save to database
     try:
-        submission_id = save_submission(submission, ip_address, user_agent)
-    except Exception as e:
-        print(f"Database error: {e}")
+        submission_id = await save_submission(submission, ip_address, user_agent)
+    except aiosqlite.Error as e:
+        logger.error(
+            "Database save failed",
+            error_type=type(e).__name__,
+            error_message=str(e),
+            ip_address=ip_address,
+            email=submission.email,
+            subject=submission.subject
+        )
         raise HTTPException(
             status_code=500,
             detail="Failed to save submission. Please try again later."
         )
+    except Exception as e:
+        logger.error(
+            "Unexpected database error",
+            error_type=type(e).__name__,
+            error_message=str(e),
+            ip_address=ip_address,
+            email=submission.email
+        )
+        raise HTTPException(
+            status_code=500,
+            detail="An unexpected error occurred. Please try again later."
+        )
     
     # Send notification
     try:
-        send_email_notification(submission, submission_id)
+        await send_email_notification(submission, submission_id)
     except Exception as e:
-        print(f"Notification error: {e}")
+        logger.warning(
+            "Notification failed but request succeeded",
+            error_type=type(e).__name__,
+            error_message=str(e),
+            submission_id=submission_id,
+            email=submission.email,
+            subject=submission.subject
+        )
         # Don't fail the request if notification fails
     
     return ContactResponse(
@@ -466,10 +520,10 @@ async def contact_health():
         cursor.execute("SELECT COUNT(*) FROM contact_submissions")
         total_submissions = cursor.fetchone()[0]
         conn.close()
-        
+
         # Check rate limiting
         rate_limiter_status = "redis" if REDIS_AVAILABLE else "in-memory"
-        
+
         return {
             "status": "healthy",
             "database": "connected",
@@ -477,8 +531,24 @@ async def contact_health():
             "rate_limiter": rate_limiter_status,
             "email_configured": SENDGRID_API_KEY is not None
         }
-    except Exception as e:
+    except sqlite3.Error as e:
+        logger.error(
+            "Database health check failed",
+            error_type=type(e).__name__,
+            error_message=str(e),
+            db_path=str(DB_PATH)
+        )
         raise HTTPException(
             status_code=503,
-            detail=f"Contact service unhealthy: {str(e)}"
+            detail="Database connection failed"
+        )
+    except Exception as e:
+        logger.error(
+            "Health check failed",
+            error_type=type(e).__name__,
+            error_message=str(e)
+        )
+        raise HTTPException(
+            status_code=503,
+            detail="Service health check failed"
         )
